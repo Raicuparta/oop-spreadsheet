@@ -1,0 +1,8 @@
+UML:
+Os métodos listados na classe "Folha" serão implementados pela representação escolhida, que neste caso será um array, mas desta forma há a flexibilidade para permitir a alteração da estrutura usada para essa representação.
+
+Um caso semelhante na classe "Cut Buffer", cujos métodos serão implementados de forma diferente dependendo da estrutura usada.
+
+As classes "Função Binária" e "Função Aplicada a Intervalos" terão constructores que populam os seus atributos, neste caso dois inteiros ou um vector de inteiros, respectivamente. Esses atributos serão usados no método "calcular", nas subclasses "ADD", SUB", etc, para fazer o cálculo necessário.
+
+Na classe "Conteúdo" é guardado o inteiro "_valor", que guarda o valor dessa célula, independentemente de ser um Literal, Referência, ou Função.A ideia aqui é fazer com que não seja necessário verificar o valor das células referidas ou das funções numa dada célula todas as vezes que são acedidas, e fazer com que as funções não tenham de se preocupar com o tipo de conteúdo que estão a lidar (Literal, Referência ou Função). Apenas há que ter atenção que os valores devem estar devidamente actualizados.

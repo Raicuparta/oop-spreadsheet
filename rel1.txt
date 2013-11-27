@@ -1,0 +1,9 @@
+A principal estrutura presente no projecto é a Folha (Sheet), que armazena os seus dados numa estrutura da interface "SheetRepresentation".
+A interface "SheetRepresentation" serve para permitir uma maior flexibilidade nas possíveis estruturas de armazenamento para as células da folha, sendo possível usar qualquer estrutura, desde que implemente correctamente os métodos da interface em questão (comportamento básico de uma matriz / array bidimensional).
+
+Neste caso a implementação de SheetRepresentation foi feita com uma "SheetArray", que armazena os dados da folha num array de arrays de células.
+
+A fábrica (Factory) é utilizada tanto para a leitura e interpretação de linhas de texto e criação dos objectos apropriados, como para o caso inverso, escrita de objectos em formato legível.
+
+Para garantir o acesso da fábrica e do gestor de ficheiros (FileManager) à folha, esta é passada a ambos como atributo, com a verificação de que a folha a ser manipulada se tratava sempre da mesma instância.
+Este acesso da fábrica e do gestor à folha foi necessário para o correcto funcionamento da criação de referências (Reference). 
