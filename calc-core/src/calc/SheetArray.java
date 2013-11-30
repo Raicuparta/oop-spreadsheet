@@ -14,6 +14,7 @@ public class SheetArray extends SheetRepresentation implements Serializable {
 	public Cell getCell(int line, int column) throws ArrayIndexOutOfBoundsException {
 		if (_sheetArray[line-1][column-1] == null) {
 			Cell cell = new Cell(line, column);
+			_sheetArray[line-1][column-1] = cell;
 			return cell;
 		} else {
 			return _sheetArray[line-1][column-1];

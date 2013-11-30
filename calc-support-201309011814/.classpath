@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="calc/textui/edit/PaxHeaders.6815/|calc/textui/main/PaxHeaders.6815/|calc/textui/search/PaxHeaders.6815/" kind="src" path="calc-support-201309011814/src"/>
+	<classpathentry kind="src" path="calc-support-201309011814/src/calc/textui/edit/PaxHeaders.6815"/>
+	<classpathentry kind="src" path="calc-support-201309011814/src/calc/textui/main/PaxHeaders.6815"/>
+	<classpathentry kind="src" path="calc-support-201309011814/src/calc/textui/search/PaxHeaders.6815"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/po-uilib-201308300030"/>
+	<classpathentry kind="output" path="calc-support-201309011814/bin"/>
+</classpath>

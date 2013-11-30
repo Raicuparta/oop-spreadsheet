@@ -27,17 +27,16 @@ public class Insert extends Command<FileManager> {
 	 */
 	@Override
 	public final void execute() throws IOException {
-		try {
-			String referenceString = IO.readString(Message.addressRequest());
-			Reference reference = _receiver.getFactory().readReference(referenceString);
-			
-			String contentString = IO.readString(Message.contentsRequest());
-			Content content = _receiver.getFactory().readContent(contentString);
-			
-			reference.insert(content);
-			
-		}
-		catch(IOException e) {}
+	
+		String referenceString = IO.readString(Message.addressRequest());
+		Reference reference = _receiver.getFactory().readReference(referenceString);
+		
+		String contentString = IO.readString(Message.contentsRequest());
+		Content content = _receiver.getFactory().readContent(contentString);
+		
+		reference.insert(content);
+		
+		
 	}
 
 

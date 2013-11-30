@@ -7,9 +7,6 @@ public class Cell implements Serializable {
 	private int _line;
 	private int _column;
 	private Content _content;
-	
-	
-	public Cell() {}
 
 	public Cell(Content content, int line, int column) {
 		this(line, column);

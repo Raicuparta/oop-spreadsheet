@@ -4,8 +4,8 @@ import static ist.po.ui.Dialog.IO;
 
 import java.lang.reflect.InvocationTargetException;
 
-import calc.Factory;
 import calc.FileManager;
+
 import java.io.*;
 
 //FIXME: include project-specific imports here
@@ -16,16 +16,12 @@ import java.io.*;
 public class Calc {
   /**
    * @param args
- * @throws InvocationTargetException 
- * @throws IllegalArgumentException 
- * @throws IllegalAccessException 
- * @throws InstantiationException 
- * @throws SecurityException 
- * @throws NoSuchMethodException 
  * @throws ClassNotFoundException 
+ * @throws IOException 
+   * 
    */
   @SuppressWarnings("nls")
-  public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException /* FIXME: optionally, declare thrown exceptions here */ {
+  public static void main(String[] args) throws ClassNotFoundException, IOException  {
 
 	FileManager manager = new FileManager();
 	
@@ -35,9 +31,10 @@ public class Calc {
 	if (datafile != null) {
 
 		manager.newFactory();
+		BufferedReader in;
 		
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(datafile));
+			in = new BufferedReader(new FileReader(datafile));
 			int lines = 0, columns = 0;
 		
 			if ((s = in.readLine()) != null) {
@@ -55,10 +52,25 @@ public class Calc {
 				manager.getFactory().readLine(s);
 			}
 			
+			in.close();
 		}
-		catch (IOException e) {}
-		//catch (FileNotFoundException e) {}
 		
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+				
 
 	} else {
 	}

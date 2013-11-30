@@ -23,18 +23,22 @@ public abstract class BinaryFunction extends Function {
 	public abstract String getName();
 	
 	public String toString() {
+		/*
+		 * Caso um dos argumentos seja uma referencia, o metodo toString inclui o caracter '=',
+		 * que nao faz parte do output esperado para as funcoes, logo tem que ser removido.
+		 */
 		String[] splitArray1 = _operator1.toString().split("=");
 		String[] splitArray2 = _operator2.toString().split("=");
 		
 		String op1, op2;
 		
-		if (splitArray1[1] != null) {
+		if (splitArray1.length == 2) {
 			op1 = splitArray1[1];
 		} else {
 			op1 = splitArray1[0];
 		}
 		
-		if (splitArray2[1] != null) {
+		if (splitArray2.length == 2) {
 			op2 = splitArray2[1];
 		} else {
 			op2 = splitArray2[0];

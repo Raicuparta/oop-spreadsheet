@@ -49,19 +49,20 @@ public class Show extends Command<FileManager> {
 				
 				Reference reference = _receiver.getFactory().readReference(requestedString);
 				if (reference != null) {
-					if(reference.getCell() != null) {
-						String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-						if(reference.getCell().getContent() != null) {
-							IO.println(outputString + reference.getCell().getContent().toString());
-						} else {
-							IO.println(outputString);
-						}
+					String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
+					if(reference.getCell().getContent() != null) {
+						IO.println(outputString + reference.getCell().getContent().toString());
+					} else {
+						IO.println(outputString);
 					}
 				}
 			}
 		}
 		
-		catch(ArrayIndexOutOfBoundsException e) { throw new InvalidCellRange(requestedString); }
+		catch(ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+			throw new InvalidCellRange(requestedString); 
+		}
 	
 	}
 }

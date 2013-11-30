@@ -2,7 +2,6 @@ package calc;
 
 
 import java.io.Serializable;
-import java.io.Serializable;
 
 public class Reference extends Content implements Serializable {
 
@@ -13,7 +12,12 @@ public class Reference extends Content implements Serializable {
 	}
 	
 	public int calculate() {
-		return _cell.getContent().calculate();
+		if (_cell.getContent() == null) {
+			return 0;		// mudar isto
+		}
+		else{
+			return _cell.getContent().calculate();
+		}
 	}
 	
 	public void insert(Content content) {
@@ -24,16 +28,15 @@ public class Reference extends Content implements Serializable {
 		return _cell;
 	}
 	
+	@Override
 	public String toString() {
 		String valueString = "#VALUE";
 		
-		if (_cell != null) {
-			if (_cell.getContent() != null) {
-				valueString = "" + calculate();
-			}
-		} else {
-			_cell = new Cell();
+
+		if (_cell.getContent() != null) {
+			valueString = "" + calculate();
 		}
+
 		
 		return valueString +  "=" + _cell.getLine() + ";" + _cell.getColumn();
 	}

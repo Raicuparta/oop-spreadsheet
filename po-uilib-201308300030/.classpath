@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="ist/po/io/PaxHeaders.32143/|ist/po/ui/PaxHeaders.32143/" kind="src" path="po-uilib-201308300030/src"/>
+	<classpathentry kind="src" path="po-uilib-201308300030/src/ist/po/io/PaxHeaders.32143"/>
+	<classpathentry kind="src" path="po-uilib-201308300030/src/ist/po/ui/PaxHeaders.32143"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

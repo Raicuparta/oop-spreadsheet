@@ -2,7 +2,6 @@ package calc;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 import calc.Content;
 
@@ -65,11 +64,11 @@ public class Factory  {
 		Content content = null;
 		String[] splitArray = inputString.split("=", 2);
 
-		if (splitArray[0] != null) { //temos literal
+		if (splitArray[0].length() != 0) { //temos literal
 			content = this.readLiteral(splitArray[0]);
 		}
 		
-		else if ((splitArray[0] == null) && (splitArray[1] != null)) { //temos funcao ou referencia
+		else if ((splitArray[0].length() == 0) && (splitArray[1].length() != 0)) { //temos funcao ou referencia
 
 			if (splitArray[1].endsWith(")")) { //temos funcao
 				
@@ -105,14 +104,8 @@ public class Factory  {
 		column = Integer.parseInt(splitArray[1]);
 
 		cell = _sheet.getMatrix().getCell(line, column);
-		
-		if (cell == null) {
-			cell = new Cell(line, column);
-			_sheet.getMatrix().setCell(line, column, cell);
-		}
 
 		reference = new Reference(cell);
-
 
 		return reference;
 		
