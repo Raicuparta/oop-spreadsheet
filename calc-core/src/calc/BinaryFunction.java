@@ -28,8 +28,8 @@ public abstract class BinaryFunction extends Function implements Serializable {
 		
 		String valueString = "#VALUE";
 				
-		String op1 = parseOperators(_operator1);
-		String op2 = parseOperators(_operator2);
+		String op1 = super.parseOperators(_operator1);
+		String op2 = super.parseOperators(_operator2);
 		
 		if (hasValue()){
 			valueString = "" + calculate();
@@ -42,25 +42,6 @@ public abstract class BinaryFunction extends Function implements Serializable {
 	public boolean hasValue() {
 		return (_operator1.hasValue()) && (_operator2.hasValue());
 	}
-	
-	public String parseOperators(Content operator) {
-		
-		/*
-		 * Caso um dos argumentos seja uma referencia, o metodo toString inclui o caracter '=',
-		 * que nao faz parte do output esperado para as funcoes, logo tem que ser removido.
-		 */		
-		String[] splitArray = operator.print().split("=");
-		
-		String op;
-		
-		if (splitArray.length == 2) {
-			op = splitArray[1];
-			
-		} else {
-			op = splitArray[0];
-		}
-		
-		return op;
-	}
+
 	
 }

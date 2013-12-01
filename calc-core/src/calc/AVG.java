@@ -3,21 +3,18 @@ import java.util.ArrayList;
 
 public class AVG extends RangedFunction {
 
-	public AVG(ArrayList<Reference> interval) {
+	public AVG(Range interval) {
 		super(interval);
 	}
 
 	public int calculate() {
 		int total = 0;
-		for (Reference reference : getInterval()) {
+		for (Reference reference : getRange().getInterval()) {
 			total += reference.calculate();
 		}
-		return total/getInterval().size();
+		return total/getRange().getInterval().size();
 	}
 	
-	public String print() {
-		return null;
-	}
 	
 	public String getName() {
 		return "AVG";

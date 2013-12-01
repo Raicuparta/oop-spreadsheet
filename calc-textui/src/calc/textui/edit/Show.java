@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import calc.FileManager;
 import calc.Reference;
+import calc.Range;
 import static ist.po.ui.Dialog.IO;
 import ist.po.ui.Command;
 import ist.po.ui.DialogException;
@@ -30,10 +31,10 @@ public class Show extends Command<FileManager> {
 		String requestedString = IO.readString(Message.addressRequest());
 		try {
 			if (requestedString.contains(":")) {
-				Reference[] referenceArray = _receiver.getFactory().readInterval(requestedString);
+				Range range = _receiver.getFactory().readInterval(requestedString);
 				
-				if (referenceArray != null){
-					for(Reference reference : referenceArray) {
+				if (range != null){
+					for(Reference reference : range.getInterval()) {
 						if (reference != null) {
 							if(reference.getCell() != null) {
 								String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";

@@ -4,21 +4,20 @@ import java.util.ArrayList;
 
 public class PRD extends RangedFunction {
 
-	public PRD(ArrayList<Reference> interval) {
+	public PRD(Range interval) {
 		super(interval);
 	}
 
 	public int calculate() {
 		int prod = 1;
-		for (Reference reference : getInterval()) {
+		for (Reference reference : getRange().getInterval()) {
 			prod *= reference.calculate();
 		}
 		return prod;
 	}
-
 	
-	public String print() {
-		return null;
+	public String getName() {
+		return "PRD";
 	}
 	
 }

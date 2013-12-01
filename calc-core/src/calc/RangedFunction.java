@@ -8,28 +8,43 @@ public abstract class RangedFunction extends Function implements Serializable {
 
 	//private ArrayList<Integer> operators;
 	
-	private ArrayList<Reference> _interval;
+	private Range _range;
 	
 /*	public ArrayList<Integer> getOperators() {
 		return operators;
 	}*/
 	
-	public ArrayList<Reference> getInterval() {
-		return _interval;
+	public Range getRange() {
+		return _range;
 	}
 
-	public RangedFunction(ArrayList<Reference> interval) {
+	public RangedFunction(Range range) {
 		
-		_interval = interval;
+		_range = range;
 		
 	}
+	
+	public abstract String getName();
 	
 	public abstract int calculate();
 	
-	public abstract String print();
+	public String print() {
+		
+		String valueString = "#VALUE";
+				
+		String op1 = super.parseOperators(_range.getFirst());
+		String op2 = super.parseOperators(_range.getLast());
+		
+		
+		if (hasValue()){
+			valueString = "" + calculate();
+		}
+				
+		return valueString + "=" + getName() + "(" + op1 + ":" + op2 + ")";
+	}
 	
 	public boolean hasValue() {
-		return true; //ARRANJAR ISTO
+		return _range.hasValue();
 	}
 	
 }

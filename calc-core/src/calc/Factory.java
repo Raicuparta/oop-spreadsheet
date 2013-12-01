@@ -135,9 +135,9 @@ public class Factory {
 		
 		if (inputString.contains(":")) {
 			
-			Reference[] interval = readInterval(splitArray[1]);
-			Constructor<?> funcConstructor = c.getConstructor(Reference[].class);
-			o = funcConstructor.newInstance(interval);
+			Range range = readInterval(splitArray[1]);
+			Constructor<?> funcConstructor = c.getConstructor(Range.class);
+			o = funcConstructor.newInstance(range);
 			
 		} else {
 			
@@ -170,45 +170,15 @@ public class Factory {
 
 	}
 	
-	public Reference[] readInterval(String inputString) {
+	public Range readInterval(String inputString) {
 			
-		Reference[] interval = null;
 		String[] splitString = inputString.split(":");
 		
 		Reference firstReference = this.readReference(splitString[0]);
 		Reference lastReference = this.readReference(splitString[1]);
 		
-		int firstLine = firstReference.getCell().getLine();
-		int firstColumn = firstReference.getCell().getColumn();
-		int lastLine = lastReference.getCell().getLine();
-		int lastColumn = lastReference.getCell().getColumn();
+		Range interval = new Range(firstReference, lastReference, _sheet);
 		
-		if((firstLine != lastLine) && (firstColumn == lastColumn)) {
-			
-			interval = new Reference[lastLine - firstLine + 1];
-			
-			for(int i = 0; (i+firstLine)<= lastLine; i++) {
-				interval[i] = new Reference(_sheet.getMatrix().getCell(i+firstLine,firstColumn));				
-			}
-			
-		}
-		
-		else if((firstLine == lastLine) && (firstColumn != lastColumn)) {
-			interval = new Reference[lastColumn - firstColumn + 1];
-			
-			for(int i = 0; (i+firstColumn)<= lastColumn; i++) {
-				interval[i] = new Reference(_sheet.getMatrix().getCell(firstLine,i+firstColumn));				
-			}
-		}
-		
-		else if((firstLine == lastLine) && (firstColumn == lastColumn)) {
-			interval = new Reference[1];
-			interval[0] = new Reference(_sheet.getMatrix().getCell(firstLine,firstColumn));
-		}
-		
-		else {
-			return null;
-		}
 		
 		return interval;
 			
