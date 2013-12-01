@@ -1,6 +1,8 @@
 package calc;
 
-public abstract class BinaryFunction extends Function {
+import java.io.Serializable;
+
+public abstract class BinaryFunction extends Function implements Serializable {
 
 	private Content _operator1;
 	private Content _operator2;

@@ -3,10 +3,11 @@ package calc;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+
 import calc.Content;
 
 
-public class Factory  {
+public class Factory {
 
 	private Sheet _sheet;
 
@@ -135,7 +136,7 @@ public class Factory  {
 			
 			Reference[] interval = readInterval(splitArray[1]);
 			Constructor<?> funcConstructor = c.getConstructor(Reference[].class);
-			o = funcConstructor.newInstance(interval);
+			o = funcConstructor.newInstance((Object[])interval);
 			
 		} else {
 			
@@ -197,6 +198,15 @@ public class Factory  {
 			for(int i = 0; (i+firstColumn)<= lastColumn; i++) {
 				interval[i] = new Reference(_sheet.getMatrix().getCell(firstLine,i+firstColumn));				
 			}
+		}
+		
+		else if((firstLine == lastLine) && (firstColumn == lastColumn)) {
+			interval = new Reference[1];
+			interval[0] = new Reference(_sheet.getMatrix().getCell(firstLine,firstColumn));
+		}
+		
+		else {
+			return null;
 		}
 		
 		return interval;

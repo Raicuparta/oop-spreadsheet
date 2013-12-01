@@ -1,7 +1,10 @@
 package calc;
-import java.util.ArrayList;
 
-public abstract class RangedFunction extends Function {
+import java.io.Serializable;
+
+//import java.util.ArrayList;
+
+public abstract class RangedFunction extends Function implements Serializable {
 
 	//private ArrayList<Integer> operators;
 	

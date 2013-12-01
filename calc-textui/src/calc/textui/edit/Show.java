@@ -32,17 +32,21 @@ public class Show extends Command<FileManager> {
 			if (requestedString.contains(":")) {
 				Reference[] referenceArray = _receiver.getFactory().readInterval(requestedString);
 				
-				for(Reference reference : referenceArray) {
-					if (reference != null) {
-						if(reference.getCell() != null) {
-							String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-							if(reference.getCell().getContent() != null) {
-								IO.println(outputString + reference.getCell().getContent().print());
-							} else {
-								IO.println(outputString);
-							}
-						}		
+				if (referenceArray != null){
+					for(Reference reference : referenceArray) {
+						if (reference != null) {
+							if(reference.getCell() != null) {
+								String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
+								if(reference.getCell().getContent() != null) {
+									IO.println(outputString + reference.getCell().getContent().print());
+								} else {
+									IO.println(outputString);
+								}
+							}		
+						}
 					}
+				} else {
+					throw new InvalidCellRange(requestedString);
 				}
 			
 			} else {
@@ -63,6 +67,7 @@ public class Show extends Command<FileManager> {
 			e.printStackTrace();
 			throw new InvalidCellRange(requestedString); 
 		}
+		
 	
 	}
 }
