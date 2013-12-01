@@ -2,23 +2,23 @@ package calc;
 
 import java.io.Serializable;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 public abstract class RangedFunction extends Function implements Serializable {
 
 	//private ArrayList<Integer> operators;
 	
-	private Reference[] _interval;
+	private ArrayList<Reference> _interval;
 	
 /*	public ArrayList<Integer> getOperators() {
 		return operators;
 	}*/
 	
-	public Reference[] getInterval() {
+	public ArrayList<Reference> getInterval() {
 		return _interval;
 	}
 
-	public RangedFunction(Reference[] interval) {
+	public RangedFunction(ArrayList<Reference> interval) {
 		
 		_interval = interval;
 		

@@ -27,14 +27,17 @@ public class Reference extends Content implements Serializable {
 	}
 	
 	public boolean hasValue() {
-		return _cell.getContent() != null;
+		if(_cell.getContent() != null) {
+			return _cell.getContent().hasValue();
+		}
+		return false;
 	}
 	
 	public String print() {
 		String valueString = "#VALUE";
 		
 
-		if (_cell.getContent() != null) {
+		if (hasValue()) {
 			valueString = "" + calculate();
 		}
 

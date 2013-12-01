@@ -1,8 +1,9 @@
 package calc;
+import java.util.ArrayList;
 
 public class AVG extends RangedFunction {
 
-	public AVG(Reference[] interval) {
+	public AVG(ArrayList<Reference> interval) {
 		super(interval);
 	}
 
@@ -11,7 +12,7 @@ public class AVG extends RangedFunction {
 		for (Reference reference : getInterval()) {
 			total += reference.calculate();
 		}
-		return total/getInterval().length;
+		return total/getInterval().size();
 	}
 	
 	public String print() {

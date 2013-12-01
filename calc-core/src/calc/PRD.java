@@ -1,8 +1,10 @@
 package calc;
 
+import java.util.ArrayList;
+
 public class PRD extends RangedFunction {
 
-	public PRD(Reference[] interval) {
+	public PRD(ArrayList<Reference> interval) {
 		super(interval);
 	}
 

@@ -1,6 +1,7 @@
 package calc;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.lang.reflect.InvocationTargetException;
 
 
@@ -29,7 +30,7 @@ public class Factory {
 		Content content = null;
 		
 
-		arraySplit = inputString.split("|", 2);
+		arraySplit = inputString.split("[|]", 2);
 		referenceString = arraySplit[0];
 		Reference reference = readReference(referenceString);
 		
@@ -136,7 +137,7 @@ public class Factory {
 			
 			Reference[] interval = readInterval(splitArray[1]);
 			Constructor<?> funcConstructor = c.getConstructor(Reference[].class);
-			o = funcConstructor.newInstance((Object[])interval);
+			o = funcConstructor.newInstance(interval);
 			
 		} else {
 			
