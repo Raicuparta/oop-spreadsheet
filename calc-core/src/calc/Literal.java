@@ -15,8 +15,11 @@ public class Literal extends Content implements Serializable {
 		return _value;
 	}
 	
-	@Override
-	public String toString() {
+	public String print() {
 		return "" + _value;
+	}
+	
+	public boolean hasValue() {
+		return true;
 	}
 }

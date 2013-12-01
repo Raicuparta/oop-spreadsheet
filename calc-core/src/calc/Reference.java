@@ -12,11 +12,10 @@ public class Reference extends Content implements Serializable {
 	}
 	
 	public int calculate() {
-		if (_cell.getContent() == null) {
-			return 0;		// mudar isto
-		}
-		else{
+		if (hasValue()) {
 			return _cell.getContent().calculate();
+		} else {
+			return 0; //Este valor nunca e usado
 		}
 	}
 	
@@ -28,8 +27,11 @@ public class Reference extends Content implements Serializable {
 		return _cell;
 	}
 	
-	@Override
-	public String toString() {
+	public boolean hasValue() {
+		return _cell.getContent() != null;
+	}
+	
+	public String print() {
 		String valueString = "#VALUE";
 		
 

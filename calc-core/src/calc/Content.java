@@ -6,7 +6,8 @@ public abstract class Content {
 	
 	public abstract int calculate();
 	
-	@Override
-	public abstract String toString();
-		
+	public abstract String print();
+	
+	public abstract boolean hasValue();
+
 }

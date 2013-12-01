@@ -22,30 +22,43 @@ public abstract class BinaryFunction extends Function {
 	
 	public abstract String getName();
 	
-	public String toString() {
+	public String print() {
+		
+		String valueString = "#VALUE";
+				
+		String op1 = parseOperators(_operator1);
+		String op2 = parseOperators(_operator2);
+		
+		if (hasValue()){
+			valueString = "" + calculate();
+		}
+				
+		return valueString + "=" + getName() + "(" + op1 + "," + op2 + ")";
+	}
+	
+	
+	public boolean hasValue() {
+		return (_operator1.hasValue()) && (_operator2.hasValue());
+	}
+	
+	public String parseOperators(Content operator) {
+		
 		/*
 		 * Caso um dos argumentos seja uma referencia, o metodo toString inclui o caracter '=',
 		 * que nao faz parte do output esperado para as funcoes, logo tem que ser removido.
-		 */
-		String[] splitArray1 = _operator1.toString().split("=");
-		String[] splitArray2 = _operator2.toString().split("=");
+		 */		
+		String[] splitArray = operator.toString().split("=");
 		
-		String op1, op2;
+		String op;
 		
-		if (splitArray1.length == 2) {
-			op1 = splitArray1[1];
+		if (splitArray.length == 2) {
+			op = splitArray[1];
+			
 		} else {
-			op1 = splitArray1[0];
+			op = splitArray[0];
 		}
 		
-		if (splitArray2.length == 2) {
-			op2 = splitArray2[1];
-		} else {
-			op2 = splitArray2[0];
-		}
-		
-		
-		return calculate() + "=" + getName() + "(" + op1 + "," + op2 + ")";
+		return op;
 	}
 	
 }

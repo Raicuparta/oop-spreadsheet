@@ -2,21 +2,20 @@ package calc;
 
 public class PRD extends RangedFunction {
 
-	public PRD(Cell cell1, Cell cell2, SheetRepresentation Sheet) {
-		super(cell1, cell2, Sheet);
+	public PRD(Reference[] interval) {
+		super(interval);
 	}
 
 	public int calculate() {
-		/*int total = 0;
-		for (int value : operators) {
-			total += value;
+		int prod = 1;
+		for (Reference reference : getInterval()) {
+			prod *= reference.calculate();
 		}
-		return total*operators.size();*/
-		return 0;
+		return prod;
 	}
 
 	
-	public String toString() {
+	public String print() {
 		return null;
 	}
 	

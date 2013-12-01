@@ -29,7 +29,7 @@ public class Show extends Command<FileManager> {
 			
 		String requestedString = IO.readString(Message.addressRequest());
 		try {
-			if (requestedString.indexOf(':') != -1) {
+			if (requestedString.contains(":")) {
 				Reference[] referenceArray = _receiver.getFactory().readInterval(requestedString);
 				
 				for(Reference reference : referenceArray) {

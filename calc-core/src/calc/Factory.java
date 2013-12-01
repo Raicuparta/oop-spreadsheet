@@ -22,15 +22,17 @@ public class Factory  {
 
 	public void readLine(String inputString) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
-		int line, column;
 		String[] arraySplit;
 		String splitContent;
+		String referenceString;
 		Content content = null;
+		
 
-		arraySplit = inputString.split("[;|]", 3);
-		line = Integer.parseInt(arraySplit[0]);
-		column = Integer.parseInt(arraySplit[1]);
-		splitContent = arraySplit[2];
+		arraySplit = inputString.split("|", 2);
+		referenceString = arraySplit[0];
+		Reference reference = readReference(referenceString);
+		
+		splitContent = arraySplit[1];
 
 		arraySplit = splitContent.split("=", 2);
 
@@ -50,7 +52,7 @@ public class Factory  {
 			}
 		}
 
-		_sheet.insert(content, line, column);
+		reference.insert(content);
 	}
 
 	public int readDimension(String inputString) {
@@ -124,31 +126,42 @@ public class Factory  {
 
 		Function function;
 
-		Content arg1;
-		Content arg2;
-
 		String[] splitArray = inputString.split("[(,)]", 4);
-
-
-
-		if (splitArray[1].contains(";")) { //temos ref no 1o argumento
-			arg1 = readReference(splitArray[1]);
-
-		} else {//temos literal no 1o argumento
-			arg1 = readLiteral(splitArray[1]);
-		}
-
-		if (splitArray[2].contains(";")) { //temos ref no 2o argumento
-			arg2 = readReference(splitArray[2]);
-
-		} else {//temos literal no 2o argumento
-			arg2 = readLiteral(splitArray[2]);
-		}
-
-
+	
 		Class<?> c = Class.forName("calc."+splitArray[0]);
-		Constructor<?> funcConstructor = c.getConstructor(Content.class, Content.class);
-		Object o = funcConstructor.newInstance(arg1, arg2);
+		Object o;
+		
+		if (inputString.contains(":")) {
+			
+			Reference[] interval = readInterval(splitArray[1]);
+			Constructor<?> funcConstructor = c.getConstructor(Reference[].class);
+			o = funcConstructor.newInstance(interval);
+			
+		} else {
+			
+			Content arg1;
+			Content arg2;
+			
+			if (splitArray[1].contains(";")) { //temos ref no 1o argumento
+				arg1 = readReference(splitArray[1]);
+
+			} else {//temos literal no 1o argumento
+				arg1 = readLiteral(splitArray[1]);
+			}
+
+			if (splitArray[2].contains(";")) { //temos ref no 2o argumento
+				arg2 = readReference(splitArray[2]);
+
+			} else {//temos literal no 2o argumento
+				arg2 = readLiteral(splitArray[2]);
+			}
+
+			Constructor<?> funcConstructor = c.getConstructor(Content.class, Content.class);
+			o = funcConstructor.newInstance(arg1, arg2);
+		}
+
+		
+		
 		function = (Function)o;
 
 		return function;
