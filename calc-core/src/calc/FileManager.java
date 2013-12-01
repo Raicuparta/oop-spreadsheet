@@ -54,6 +54,7 @@ public class FileManager {
 	
 	public void saveSheet(String fileName) throws IOException {
 		
+		_currentSheet.setName(fileName);
 		this.newFactory();
 		ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
 		

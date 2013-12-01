@@ -28,7 +28,6 @@ public class Range implements Serializable {
 			for(int i = 0; (i+firstLine)<= lastLine; i++) {
 				_interval.add(new Reference(_sheet.getMatrix().getCell(i+firstLine,firstColumn)));				
 			}
-			
 		}
 		
 		else if((firstLine == lastLine) && (firstColumn != lastColumn)) {
@@ -40,8 +39,7 @@ public class Range implements Serializable {
 		
 		else if((firstLine == lastLine) && (firstColumn == lastColumn)) {
 			_interval.add(new Reference(_sheet.getMatrix().getCell(firstLine,firstColumn)));
-		}
-		
+		}		
 	}
 	
 	public ArrayList<Reference> getInterval() {

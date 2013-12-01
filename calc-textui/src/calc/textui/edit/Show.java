@@ -33,7 +33,7 @@ public class Show extends Command<FileManager> {
 			if (requestedString.contains(":")) {
 				Range range = _receiver.getFactory().readInterval(requestedString);
 				
-				if (range != null){
+				if (!range.getInterval().isEmpty()){
 					for(Reference reference : range.getInterval()) {
 						if (reference != null) {
 							if(reference.getCell() != null) {
@@ -65,7 +65,6 @@ public class Show extends Command<FileManager> {
 		}
 		
 		catch(ArrayIndexOutOfBoundsException e) {
-			e.printStackTrace();
 			throw new InvalidCellRange(requestedString); 
 		}
 		
