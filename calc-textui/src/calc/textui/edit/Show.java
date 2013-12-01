@@ -37,7 +37,7 @@ public class Show extends Command<FileManager> {
 						if(reference.getCell() != null) {
 							String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
 							if(reference.getCell().getContent() != null) {
-								IO.println(outputString + reference.getCell().getContent().toString());
+								IO.println(outputString + reference.getCell().getContent().print());
 							} else {
 								IO.println(outputString);
 							}
@@ -51,7 +51,7 @@ public class Show extends Command<FileManager> {
 				if (reference != null) {
 					String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
 					if(reference.getCell().getContent() != null) {
-						IO.println(outputString + reference.getCell().getContent().toString());
+						IO.println(outputString + reference.getCell().getContent().print());
 					} else {
 						IO.println(outputString);
 					}

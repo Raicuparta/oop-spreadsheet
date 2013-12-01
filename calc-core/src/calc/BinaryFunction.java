@@ -47,7 +47,7 @@ public abstract class BinaryFunction extends Function {
 		 * Caso um dos argumentos seja uma referencia, o metodo toString inclui o caracter '=',
 		 * que nao faz parte do output esperado para as funcoes, logo tem que ser removido.
 		 */		
-		String[] splitArray = operator.toString().split("=");
+		String[] splitArray = operator.print().split("=");
 		
 		String op;
 		

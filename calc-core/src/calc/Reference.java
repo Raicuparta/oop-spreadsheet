@@ -1,6 +1,5 @@
 package calc;
 
-
 import java.io.Serializable;
 
 public class Reference extends Content implements Serializable {
