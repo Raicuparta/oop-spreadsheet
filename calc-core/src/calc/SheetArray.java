@@ -31,11 +31,17 @@ public class SheetArray extends SheetRepresentation implements Serializable {
 
 	private class SheetArrayIterator implements Iterator<Cell> {
 		
-		int line, column;
+		private int _line, _column;
+		
+		public SheetArrayIterator() {
+			_line = 1;
+			_column = 0;
+		}
+		
 		
 		public boolean hasNext() {
 			
-			if ( (line < _sheetArray.length) || (column < _sheetArray[0].length) ) {
+			if ( (_line < (_sheetArray.length)) || (_column < (_sheetArray[0].length)) ) {
 				return true;
 			}
 
@@ -43,11 +49,15 @@ public class SheetArray extends SheetRepresentation implements Serializable {
 		}
 
 		public Cell next() {
-			if ((column < _sheetArray[0].length) ) { //nao ultima coluna
-				return getCell(line, column++);
-			} else if (line < _sheetArray.length){ //ultima coluna, nao ultima linha
-				column = 0;
-				return getCell(line++, column);
+			
+			
+			if ((_column < (_sheetArray[0].length)) ) { //nao ultima coluna
+				_column++;
+				return getCell(_line, _column);
+			} else if (_line < (_sheetArray.length)){ //ultima coluna, nao ultima linha
+				_column = 1;
+				_line++;
+				return getCell(_line, _column);
 			} else {
 				return null;
 			}

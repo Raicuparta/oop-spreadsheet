@@ -27,7 +27,7 @@ public class New extends Command<FileManager> {
     public final void execute() throws DialogException, IOException {
 		if(_receiver.getSheet() != null) {
 			String save = IO.readString(Message.saveBeforeExit());
-			if (save == "s") {
+			if (save.equals("s")) {
 				try {
 			
 					if (_receiver.getSheet().getName() == null) {
@@ -40,7 +40,7 @@ public class New extends Command<FileManager> {
 
 				catch(IOException f) {}
 			}
-			else if (save == "n") {}
+			else if (save.equals("n")) {}
 		}
 		
 		int lines = IO.readInteger(Message.linesRequest());

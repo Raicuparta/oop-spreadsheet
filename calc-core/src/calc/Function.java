@@ -10,6 +10,10 @@ public abstract class Function extends Content {
 	
 	public abstract String getName();
 	
+	public boolean accept(Search s) {
+		return s.visitFunction(this);
+	}
+	
 	public String parseOperators(Content operator) {
 		
 		/*

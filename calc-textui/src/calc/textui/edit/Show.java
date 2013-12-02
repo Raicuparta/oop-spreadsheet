@@ -8,7 +8,6 @@ import calc.Range;
 import static ist.po.ui.Dialog.IO;
 import ist.po.ui.Command;
 import ist.po.ui.DialogException;
-import java.lang.Exception;
 
 
 /**
@@ -36,7 +35,7 @@ public class Show extends Command<FileManager> {
 				if (!range.getInterval().isEmpty()){
 					for(Reference reference : range) {
 						String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-						if(reference.hasValue()) {
+						if(reference.getCell().getContent() != null) {
 							IO.println(outputString + reference.getCell().getContent().print());
 						} else {
 							IO.println(outputString);
@@ -50,7 +49,7 @@ public class Show extends Command<FileManager> {
 				
 				Reference reference = _receiver.getFactory().readReference(requestedString);
 				String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-				if(reference.hasValue()) {
+				if(reference.getCell().getContent() != null) {
 					IO.println(outputString + reference.getCell().getContent().print());
 				} else {
 					IO.println(outputString);

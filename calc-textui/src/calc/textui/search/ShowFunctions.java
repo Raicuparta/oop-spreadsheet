@@ -2,8 +2,11 @@
 package calc.textui.search;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import calc.Cell;
 import calc.FileManager;
+import calc.textui.search.Message;
 import static ist.po.ui.Dialog.IO;
 import ist.po.ui.Command;
 import ist.po.ui.DialogException;
@@ -25,7 +28,15 @@ public class ShowFunctions extends Command<FileManager> {
 	 */
 	@Override
         public final void execute() throws DialogException, IOException {
-               //FIXME: implement command
+			String requestedString = IO.readString(Message.searchFunction());
+			
+			ArrayList<Cell> searchResults = _receiver.searchFunction(requestedString);
+			
+			for(Cell cell : searchResults) {
+				IO.println(cell.print());
+			}
+			
+			
         }
 
 }

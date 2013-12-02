@@ -21,4 +21,9 @@ public class Literal extends Content implements Serializable {
 	public boolean hasValue() {
 		return true;
 	}
+	
+	public boolean accept(Search s) {
+		return s.visitLiteral(this);
+	}
+
 }

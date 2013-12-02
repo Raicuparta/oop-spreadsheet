@@ -123,7 +123,6 @@ public class FileManager {
 		
 	}
 	
-	
 	public int copyRange(String rangeString) throws ArrayIndexOutOfBoundsException {
 		Range range;
 		if (rangeString.contains(":")) {
@@ -144,7 +143,6 @@ public class FileManager {
 		return 0;
 		
 	}
-
 
 	public void putCutBuffer(Range range) {
 		_cutBuffer = new ArrayList<Cell>();
@@ -216,9 +214,42 @@ public class FileManager {
 		}
 		
 		return 0;
-		
 	}	
 	
+	public ArrayList<Cell> searchValue(int value) {
+		
+		ArrayList<Cell> searchResults = new ArrayList<Cell>();
+		Search search = new SearchValue(value);
+		
+		for (Cell cell : _currentSheet.getMatrix()) {
+			
+			if(cell.getContent() != null) {
+				if (cell.getContent().accept(search)) {
+					searchResults.add(cell);
+				}
+			}
+		}
+		
+		
+		return searchResults;
+	}
 	
+	public ArrayList<Cell> searchFunction(String functionName) {
+		
+		ArrayList<Cell> searchResults = new ArrayList<Cell>();
+		Search search = new SearchFunction(functionName);
+		
+		for (Cell cell : _currentSheet.getMatrix()) {
+			
+			if(cell.getContent() != null) {
+				if (cell.getContent().accept(search)) {
+					searchResults.add(cell);
+				}
+			}
+		}
+		
+		
+		return searchResults;
+	}
 	
 }

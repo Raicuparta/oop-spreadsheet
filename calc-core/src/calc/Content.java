@@ -9,5 +9,7 @@ public abstract class Content {
 	public abstract String print();
 	
 	public abstract boolean hasValue();
+	
+	public abstract boolean accept(Search s);
 
 }
