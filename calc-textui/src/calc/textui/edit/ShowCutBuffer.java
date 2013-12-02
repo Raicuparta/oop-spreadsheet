@@ -2,6 +2,7 @@ package calc.textui.edit;
 
 import java.io.IOException;
 
+import calc.Cell;
 import calc.FileManager;
 import static ist.po.ui.Dialog.IO;
 import ist.po.ui.Command;
@@ -24,7 +25,14 @@ public class ShowCutBuffer extends Command<FileManager> {
 	 */
 	@Override
         public final void execute() throws DialogException, IOException {
-               //FIXME: implement command
+			try{
+               for (Cell cell : _receiver.getCutBuffer()) {
+            	   IO.println(cell.print());
+               }
+			}
+       		catch(Exception e) {
+    			e.printStackTrace();
+    		}
         }
 
 }

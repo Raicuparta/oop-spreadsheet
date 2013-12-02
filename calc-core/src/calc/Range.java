@@ -2,8 +2,9 @@ package calc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Range implements Serializable {
+public class Range implements Serializable, Iterable<Reference>{
 
 	//IMPLEMENTAR ITERABLE
 
@@ -54,6 +55,9 @@ public class Range implements Serializable {
 		return _last;
 	}
 	
+	public int getIntervalSize() {
+		return _interval.size();
+	}
 	
 	public boolean hasValue() {
 		for (Reference reference : _interval) {
@@ -64,9 +68,28 @@ public class Range implements Serializable {
 		return true;
 		
 	}
-	
-	
 
+	private class RangeIterator implements Iterator<Reference> {
+		
+	    int _index = 0;
+	    
+	    public boolean hasNext() {
+	    	return _index < _interval.size();
+	    }
+	    
+	    public Reference next() {
+	    	return _interval.get(_index++);
+	    }
+	    
+	    public void remove() {
+	    	_interval.get(_index).getCell().removeContent();
+	    }
+	 }
+	
+	@Override
+	public Iterator<Reference> iterator() {
+		return new RangeIterator();
+	}
 	
 	
 }

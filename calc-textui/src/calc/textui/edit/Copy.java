@@ -3,7 +3,6 @@ package calc.textui.edit;
 
 import java.io.IOException;
 
-
 import calc.FileManager;
 import static ist.po.ui.Dialog.IO;
 import ist.po.ui.Command;
@@ -26,7 +25,17 @@ public class Copy extends Command<FileManager> {
 	 */
 	@Override
 	public final void execute() throws DialogException, IOException {
-               //FIXME: implement command
+		String rangeString = IO.readString(Message.addressRequest());
+		
+		try {
+			if(_receiver.copyRange(rangeString) == -1) {
+				throw new InvalidCellRange(rangeString);
+			}
+		}
+		
+		catch(ArrayIndexOutOfBoundsException e) {
+			throw new InvalidCellRange(rangeString); 
+		}
 	}
 
 }

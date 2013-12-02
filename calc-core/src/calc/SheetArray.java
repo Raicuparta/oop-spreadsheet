@@ -6,9 +6,13 @@ import java.lang.ArrayIndexOutOfBoundsException;
 public class SheetArray extends SheetRepresentation implements Serializable {
 
 	private Cell[][] _sheetArray;
+	private int _lines;
+	private int _columns;
 	
 	public SheetArray (int lines, int columns) {
 		_sheetArray = new Cell[lines][columns];
+		_lines = lines;
+		_columns = columns;
 	}
 	
 	public Cell getCell(int line, int column) throws ArrayIndexOutOfBoundsException {
@@ -59,4 +63,11 @@ public class SheetArray extends SheetRepresentation implements Serializable {
 		return new SheetArrayIterator();
 	}
 	
+	public int getLines() {
+		return _lines;
+	}
+	
+	public int getColumns() {
+		return _columns;
+	}
 }

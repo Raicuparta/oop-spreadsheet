@@ -24,8 +24,19 @@ public class Delete extends Command<FileManager> {
 	 * @see ist.po.ui.Command#execute()
 	 */
 	@Override
-        public final void execute() throws DialogException, IOException {
-               //FIXME: implement command
-        }
-
+	public final void execute() throws DialogException, IOException {
+		
+		String rangeString = IO.readString(Message.addressRequest());
+				
+		try {
+			
+			if(_receiver.deleteRange(rangeString) == -1) {
+				throw new InvalidCellRange(rangeString);
+			}
+		}
+		
+		catch(ArrayIndexOutOfBoundsException e) {
+			throw new InvalidCellRange(rangeString); 
+		}
+	}
 }

@@ -24,8 +24,23 @@ public class Cut extends Command<FileManager> {
 	 * @see ist.po.ui.Command#execute()
 	 */
 	@Override
-        public final void execute() throws DialogException, IOException {
-               //FIXME: implement command
-        }
+	public final void execute() throws DialogException, IOException {
+		String rangeString = IO.readString(Message.addressRequest());
+		
+		try {
+			
+			int cut = _receiver.copyRange(rangeString);
+			
+			if(cut == -1) {
+				throw new InvalidCellRange(rangeString);
+			} else {
+				_receiver.deleteRange(rangeString);
+			}
+		}
+		
+		catch(ArrayIndexOutOfBoundsException e) {
+			throw new InvalidCellRange(rangeString); 
+		}
+	}
 
 }

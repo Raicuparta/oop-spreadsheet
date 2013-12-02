@@ -42,4 +42,26 @@ public class Cell implements Serializable {
 		_content = content;
 	}
 	
+	public void removeContent() {
+		_content = null;
+	}
+	
+	public String print() {
+		String contentString = "";
+		
+		if(_content != null) {
+			contentString = _content.print();
+		}
+		
+		return _line + ";" + _column + "|" + contentString;
+	}
+	
+	public boolean sameLine(Cell other) {
+		return (getLine() == other.getLine());
+	}
+	
+	public boolean sameColumn(Cell other) {
+		return (getLine() != other.getLine());
+	}	
+	
 }

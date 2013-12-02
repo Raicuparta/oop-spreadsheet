@@ -8,5 +8,9 @@ public abstract class SheetRepresentation implements Iterable<Cell>, Serializabl
 	
 	public abstract void setCell(int line, int column, Cell cell);
 	
+	public abstract int getLines();
+	
+	public abstract int getColumns();
+	
 	
 }

@@ -1,7 +1,5 @@
 package calc;
 
-import java.util.ArrayList;
-
 public class PRD extends RangedFunction {
 
 	public PRD(Range interval) {

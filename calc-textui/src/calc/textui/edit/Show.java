@@ -34,16 +34,12 @@ public class Show extends Command<FileManager> {
 				Range range = _receiver.getFactory().readInterval(requestedString);
 				
 				if (!range.getInterval().isEmpty()){
-					for(Reference reference : range.getInterval()) {
-						if (reference != null) {
-							if(reference.getCell() != null) {
-								String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-								if(reference.getCell().getContent() != null) {
-									IO.println(outputString + reference.getCell().getContent().print());
-								} else {
-									IO.println(outputString);
-								}
-							}		
+					for(Reference reference : range) {
+						String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
+						if(reference.hasValue()) {
+							IO.println(outputString + reference.getCell().getContent().print());
+						} else {
+							IO.println(outputString);
 						}
 					}
 				} else {
@@ -53,13 +49,11 @@ public class Show extends Command<FileManager> {
 			} else {
 				
 				Reference reference = _receiver.getFactory().readReference(requestedString);
-				if (reference != null) {
-					String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-					if(reference.getCell().getContent() != null) {
-						IO.println(outputString + reference.getCell().getContent().print());
-					} else {
-						IO.println(outputString);
-					}
+				String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
+				if(reference.hasValue()) {
+					IO.println(outputString + reference.getCell().getContent().print());
+				} else {
+					IO.println(outputString);
 				}
 			}
 		}
@@ -67,7 +61,5 @@ public class Show extends Command<FileManager> {
 		catch(ArrayIndexOutOfBoundsException e) {
 			throw new InvalidCellRange(requestedString); 
 		}
-		
-	
 	}
 }

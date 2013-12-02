@@ -1,5 +1,4 @@
 package calc;
-import java.util.ArrayList;
 
 public class AVG extends RangedFunction {
 

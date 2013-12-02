@@ -44,4 +44,6 @@ public class Reference extends Content implements Serializable {
 		
 		return valueString +  "=" + _cell.getLine() + ";" + _cell.getColumn();
 	}
+
+	
 }
