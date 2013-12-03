@@ -35,7 +35,6 @@ public class Insert extends Command<FileManager> {
 			if(_receiver.insertRange(rangeString, content) == -1) {
 				throw new InvalidCellRange(rangeString);
 			}
-			
 		}
 		
 		catch(ArrayIndexOutOfBoundsException e) {
@@ -43,10 +42,5 @@ public class Insert extends Command<FileManager> {
 		}
 			
 	}
-
-	
-	
-	
-	
 
 }

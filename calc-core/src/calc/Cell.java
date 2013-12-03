@@ -1,12 +1,15 @@
 package calc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Cell implements Serializable {
+public class Cell implements Serializable, Subject {
 
 	private int _line;
 	private int _column;
 	private Content _content;
+    private ArrayList<Observer> _observers = new ArrayList<Observer>();
+
 
 	public Cell(int line, int column) {
 		_line = line;
@@ -35,10 +38,13 @@ public class Cell implements Serializable {
 	
 	public void setContent(Content content) {
 		_content = content;
+		notifyObservers();
+		
 	}
 	
 	public void removeContent() {
 		_content = null;
+		notifyObservers();
 	}
 	
 	public String print() {
@@ -57,6 +63,17 @@ public class Cell implements Serializable {
 	
 	public boolean sameColumn(Cell other) {
 		return (getLine() != other.getLine());
-	}	
+	}
+
+	public void registerObserver(Observer o) {
+		_observers.add(o);
+	}
+ 
+    public void notifyObservers() {
+      for (int i = 0; i < _observers.size(); i++) {
+        Observer observer = _observers.get(i);
+        observer.update();
+      }
+    }
 	
 }
