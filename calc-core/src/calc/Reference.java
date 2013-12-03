@@ -2,20 +2,40 @@ package calc;
 
 import java.io.Serializable;
 
-public class Reference extends Content implements Serializable {
+public class Reference extends Content implements Serializable, Observer {
 
 	private Cell _cell;
+	private boolean _update = true;
+	private int _value;
 	
 	public Reference (Cell cell) {
 		_cell = cell;
+		cell.registerObserver(this);
+	}
+	
+	public void update() {
+		_update = true;
+	}
+	
+
+	
+	public int getValue() {
+		return _value;
 	}
 	
 	public int calculate() {
-		if (hasValue()) {
-			return _cell.getContent().calculate();
+		if (_update) {
+			_update = false;
+			if (hasValue()) {
+				_value = _cell.getContent().calculate();
+				return _value;
+			} else {
+				return 0; //Este valor nunca e usado
+			}
 		} else {
-			return 0; //Este valor nunca e usado
+			return getValue();
 		}
+		
 	}
 	
 	public void insert(Content content) {
