@@ -34,26 +34,15 @@ public class Show extends Command<FileManager> {
 				
 				if (!range.getInterval().isEmpty()){
 					for(Reference reference : range) {
-						String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-						if(reference.getCell().getContent() != null) {
-							IO.println(outputString + reference.getCell().getContent().print());
-						} else {
-							IO.println(outputString);
-						}
+						IO.println(reference.getCell().print());
 					}
 				} else {
 					throw new InvalidCellRange(requestedString);
 				}
 			
 			} else {
-				
 				Reference reference = _receiver.getFactory().readReference(requestedString);
-				String outputString = reference.getCell().getLine() + ";" + reference.getCell().getColumn() + "|";
-				if(reference.getCell().getContent() != null) {
-					IO.println(outputString + reference.getCell().getContent().print());
-				} else {
-					IO.println(outputString);
-				}
+				IO.println(reference.getCell().print());
 			}
 		}
 		

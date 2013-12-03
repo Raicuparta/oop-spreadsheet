@@ -20,7 +20,8 @@ public class Sheet implements Serializable {
 	}
 	
 	public void insert(Content content, int line, int column) {
-		Cell cell = new Cell(content, line, column);
+		Cell cell = new Cell(line, column);
+		cell.setContent(content);
 		_matrix.setCell(line, column, cell);
 	}
 	

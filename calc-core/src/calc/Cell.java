@@ -8,11 +8,6 @@ public class Cell implements Serializable {
 	private int _column;
 	private Content _content;
 
-	public Cell(Content content, int line, int column) {
-		this(line, column);
-		_content = content;
-	}
-
 	public Cell(int line, int column) {
 		_line = line;
 		_column = column;

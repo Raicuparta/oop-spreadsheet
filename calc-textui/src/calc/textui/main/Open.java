@@ -25,7 +25,7 @@ public class Open extends Command<FileManager> {
 	 * @see ist.po.ui.Command#execute()
 	 */
 	@Override
-    public final void execute() {
+    public final void execute() throws DialogException, IOException {
 		
 		String fileName = null;
 		

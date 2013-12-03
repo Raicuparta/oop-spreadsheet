@@ -21,6 +21,9 @@ public class Factory {
 		_sheet = sheet;
 	}
 
+	/*
+	 * Decifra uma linha lida e decide que tipo de conteudo e'
+	 */
 	public void readLine(String inputString) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		String[] arraySplit;
@@ -56,12 +59,18 @@ public class Factory {
 		reference.insert(content);
 	}
 
+	/*
+	 * Recebe o numero de linhas ou de colunas (em forma de string) e devolve em forma de inteiro
+	 */
 	public int readDimension(String inputString) {
 		String splitArray[] = inputString.split("=");
 		int dimension = Integer.parseInt(splitArray[1]);
 		return dimension;
 	}
 
+	/*
+	 * Recebe um conteudo em forma de string e, conforme o seu formato, decifra se e' um literal, referencia ou conteudo
+	 */
 	public Content readContent(String inputString) {
 		
 		Content content = null;
@@ -94,6 +103,9 @@ public class Factory {
 		return content;
 	}
 
+	/*
+	 * Recebe uma string no formato de "m;n" e cria uma celula nessa referencia e retorna a referencia
+	 */
 	public Reference readReference(String inputString) {
 
 		int line, column;
@@ -111,10 +123,11 @@ public class Factory {
 		reference = new Reference(cell);
 
 		return reference;
-		
-		
 	}
-
+	
+	/*
+	 * Recebe uma string no formato de "m" e cria um literal com esse valor m e retorna-o
+	 */
 	public Literal readLiteral(String inputString) {
 
 		int value = Integer.parseInt(inputString);
@@ -123,6 +136,10 @@ public class Factory {
 
 	}
 
+	/*
+	 * Recebe uma string no formato de "FUNCION(content,content)", decifra qual e' a funcao e o tipo de conteudo
+	 * dos seus argumentos, cria a funcao e retorna-a
+	 */
 	public Function readFunction(String inputString) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		Function function;
@@ -132,13 +149,17 @@ public class Factory {
 		Class<?> c = Class.forName("calc."+splitArray[0]);
 		Object o;
 		
+		// Se for uma funcao aplicada a intervalos
 		if (inputString.contains(":")) {
 			
 			Range range = readInterval(splitArray[1]);
 			Constructor<?> funcConstructor = c.getConstructor(Range.class);
 			o = funcConstructor.newInstance(range);
-			
-		} else {
+		
+		}
+		
+		// Se for uma funcao binaria
+		else {
 			
 			Content arg1;
 			Content arg2;
@@ -169,6 +190,9 @@ public class Factory {
 
 	}
 	
+	/*
+	 * Recebe uma string no formato de "m;n:o;p", decifra e cria uma gama, e retorna-a
+	 */
 	public Range readInterval(String inputString) {
 			
 		String[] splitString = inputString.split(":");

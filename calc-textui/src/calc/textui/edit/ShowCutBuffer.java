@@ -24,15 +24,17 @@ public class ShowCutBuffer extends Command<FileManager> {
 	 * @see ist.po.ui.Command#execute()
 	 */
 	@Override
-        public final void execute() throws DialogException, IOException {
-			try{
-               for (Cell cell : _receiver.getCutBuffer()) {
-            	   IO.println(cell.print());
-               }
+    public final void execute() throws DialogException, IOException {
+		try {
+			if (_receiver.getCutBuffer() != null) {
+				for (Cell cell : _receiver.getCutBuffer()) {
+					IO.println(cell.print());
+				}
 			}
-       		catch(Exception e) {
-    			e.printStackTrace();
-    		}
-        }
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
 
 }

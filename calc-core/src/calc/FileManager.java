@@ -59,6 +59,9 @@ public class FileManager {
 		}
 	}
 	
+	/*
+	 * Guarda uma folha
+	 */
 	public void saveSheet(String fileName) throws IOException {
 		
 		_currentSheet.setName(fileName);
@@ -70,6 +73,9 @@ public class FileManager {
 		out.close();
 	}
 	
+	/*
+	 * Apaga uma gama
+	 */
 	public int deleteRange(String rangeString) {
 		
 		if (rangeString.contains(":")) {
@@ -99,6 +105,9 @@ public class FileManager {
 		
 	}
 	
+	/*
+	 * Insere uma gama
+	 */
 	public int insertRange(String rangeString, Content content) throws ArrayIndexOutOfBoundsException {
 	
 		if (rangeString.contains(":")) {
@@ -123,6 +132,9 @@ public class FileManager {
 		
 	}
 	
+	/*
+	 * Copia uma gama
+	 */
 	public int copyRange(String rangeString) throws ArrayIndexOutOfBoundsException {
 		Range range;
 		if (rangeString.contains(":")) {
@@ -144,6 +156,9 @@ public class FileManager {
 		
 	}
 
+	/*
+	 * Poe uma gama no cutBuffer
+	 */
 	public void putCutBuffer(Range range) {
 		_cutBuffer = new ArrayList<Cell>();
 		int columnInc = 0;
@@ -160,7 +175,8 @@ public class FileManager {
 		for (Reference reference : range) {
 			Cell cell;
 			if (reference.hasValue()) {
-				cell = new Cell(reference.getCell().getContent(), line, column);
+				cell = new Cell(line, column);
+				cell.setContent(reference.getCell().getContent());
 			} else {
 				cell = new Cell(line, column);
 			}
@@ -172,45 +188,51 @@ public class FileManager {
 		}
 	}
 	
+	/*
+	 * Cola a gama que está no cutBuffer
+	 */
 	public int pasteRange(String rangeString) throws ArrayIndexOutOfBoundsException {
 
 		Range range;
-		if (rangeString.contains(":")) {
-			boolean canPaste = false;
-			range = getFactory().readInterval(rangeString);
-			
-			if (range.getIntervalSize() == _cutBuffer.size()) {
-				if ((range.getFirst().getCell().sameLine(range.getLast().getCell()) && (_cutBuffer.get(0).sameLine(_cutBuffer.get(_cutBuffer.size() - 1)))) ||
-					(range.getFirst().getCell().sameColumn(range.getLast().getCell()) && (_cutBuffer.get(0).sameColumn(_cutBuffer.get(_cutBuffer.size() - 1)))) ) {
-					
-					canPaste = true;
-				}
-			}
-			
-			int i = 0;
-			if ((!range.getInterval().isEmpty()) && canPaste){
-				for (Reference reference : range) {
-					reference.insert(_cutBuffer.get(i).getContent());
-					i++;
-				}
-			} else {
-				return -1;
-			}
 		
-		} else {
-			
-			Reference reference = getFactory().readReference(rangeString);
-			int line = reference.getCell().getLine();
-			int column = reference.getCell().getColumn();
-			
-			for (Cell cell : _cutBuffer) {
-				if (((line + cell.getLine()-1) <= _currentSheet.getMatrix().getLines()) && ((column + cell.getColumn()-1) <= _currentSheet.getMatrix().getColumns())) {
-					_currentSheet.getMatrix().getCell(line + cell.getLine()-1, column + cell.getColumn()-1).setContent(cell.getContent());
-				} else {
-					break;
+		if (_cutBuffer != null) {
+			if (rangeString.contains(":")) {
+				boolean canPaste = false;
+				range = getFactory().readInterval(rangeString);
+				
+				if (range.getIntervalSize() == _cutBuffer.size()) {
+					if ((range.getFirst().getCell().sameLine(range.getLast().getCell()) && (_cutBuffer.get(0).sameLine(_cutBuffer.get(_cutBuffer.size() - 1)))) ||
+						(range.getFirst().getCell().sameColumn(range.getLast().getCell()) && (_cutBuffer.get(0).sameColumn(_cutBuffer.get(_cutBuffer.size() - 1)))) ) {
+						
+						canPaste = true;
+					}
 				}
-			}
+				
+				int i = 0;
+				if ((!range.getInterval().isEmpty()) && canPaste){
+					for (Reference reference : range) {
+						reference.insert(_cutBuffer.get(i).getContent());
+						i++;
+					}
+				} else {
+					return -1;
+				}
 			
+			} else {
+				
+				Reference reference = getFactory().readReference(rangeString);
+				int line = reference.getCell().getLine();
+				int column = reference.getCell().getColumn();
+				
+				for (Cell cell : _cutBuffer) {
+					if (((line + cell.getLine()-1) <= _currentSheet.getMatrix().getLines()) && ((column + cell.getColumn()-1) <= _currentSheet.getMatrix().getColumns())) {
+						_currentSheet.getMatrix().getCell(line + cell.getLine()-1, column + cell.getColumn()-1).setContent(cell.getContent());
+					} else {
+						break;
+					}
+				}
+				
+			}
 		}
 		
 		return 0;
